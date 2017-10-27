@@ -13,7 +13,6 @@ angular.module('starter.controllers', [])
     goodSleep: true
   }
 
-  console.log($scope.logObject);
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {

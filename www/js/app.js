@@ -5,10 +5,17 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var db = null;
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, $cordovaSQLite) {
     $ionicPlatform.ready(function () {
+
+      document.addEventListener('deviceready', function() {
+        window.sqlitePlugin.echoTest(function() {
+          console.log('ECHO test OK');
+        });
+      });
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -20,6 +27,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+
+    db = $cordovaSQLite.openDB("my.db");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS things (id integer primary key, date text, smallAmount int, bigAmount int, eaten int, timeStarted text, timeEnded text, ableToDrive int, timeSleep text, goodSleep int)");
     });
   })
 
