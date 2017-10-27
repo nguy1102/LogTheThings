@@ -1,1 +1,32 @@
 /* Empty. Add your own CSS if you like */
+.label {
+  float: left;
+  color: #0e70a8;
+  width: 30%;
+}
+
+.log-content {
+  
+}
+
+.log-icon {
+  font-size: 55px;
+  
+}
+
+.submit-area {
+  text-align: center;
+}
+
+.submit-button{
+  width: 60%;
+}
+.stacked-label {
+  font-size: 11px;
+}
+
+.log-icon-small {
+  font-size: 40px;
+  padding-left: 6px;
+}
+

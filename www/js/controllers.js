@@ -1,6 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope) {
+  $scope.logObject = {
+    date: new Date(),
+    smallAmount: 0,
+    bigAmount: 0,
+    eaten: true,
+    timeStarted: null,
+    timeEnded: null,
+    ableToDrive: true,
+    timeSleep: null,
+    goodSleep: true
+  }
+
+  console.log($scope.logObject);
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -25,4 +39,11 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
-});
+})
+
+.controller('historyController', function($scope) {
+
+  $scope.message = 'butts';
+    
+})
+;
