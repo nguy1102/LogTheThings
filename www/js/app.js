@@ -6,13 +6,14 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var db = null;
+var db1 = null;
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
   .run(function ($ionicPlatform, $cordovaSQLite) {
     $ionicPlatform.ready(function () {
 
-      document.addEventListener('deviceready', function() {
-        window.sqlitePlugin.echoTest(function() {
+      document.addEventListener('deviceready', function () {
+        window.sqlitePlugin.echoTest(function () {
           console.log('ECHO test OK');
         });
       });
@@ -28,8 +29,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         StatusBar.styleDefault();
       }
 
-    db = $cordovaSQLite.openDB("my.db");
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS things (id integer primary key, date text, smallAmount int, bigAmount int, eaten int, timeStarted text, timeEnded text, ableToDrive int, timeSleep text, goodSleep int)");
+      if (window.cordova && ionic.Platform.isAndroid()) {
+        db1 = window.sqlitePlugin.openDatabase({ name: 'log.db', location: 'default' });
+        createTable();
+      } else if (ionic.Platform.isAndroid()){
+        db1 = window.sqlitePlugin.openDatabase({name: 'log.db', iosDatabaseLocation: 'Library'});
+        createTable();
+      }
+
+
+      function createTable(){
+        $cordovaSQLite.execute(db1, "CREATE TABLE IF NOT EXISTS things (id integer PRIMARY KEY ASC, date text, smallAmount int, bigAmount int, eaten int, timeStarted text, timeEnded text, ableToDrive int, timeSleep text, goodSleep int)");      
+      }
     });
   })
 

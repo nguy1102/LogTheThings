@@ -1,9 +1,54 @@
 <ion-view view-title="History">
-    <ion-content class="padding">
-      <ion-list>
+  <ion-content class="padding">
+    <div>
+    <div class="label" ng-click="driving = true">
+      <i class="log-icon-small ion-model-s"></i>
+    </div>
+    <div class="label" ng-click="driving = false">
+      <i class="log-icon ion-ios-moon-outline"></i>
+    </div>
+  </div>
 
-  
-      </ion-list>
-  
-    </ion-content>
-  </ion-view>
+
+    <table ng-show="driving" class="responstable">
+      <tr>
+        <th>Date</th>
+        <th>Ended</th>
+        <th>(16oz)</th>
+        <th>(24oz)</th>
+        <th>Drive</th>
+      </tr>
+      <tr ng-repeat="entry in logHistory">
+        <td>{{ entry.date | date: "MM-dd-yyyy"}}</td>
+        <td>{{ entry.timeEnded | date: "HH:mm:ss"}}</td>
+        <td>{{ entry.smallAmount }}</td>
+        <td>{{ entry.bigAmount }}</td>
+        <td>{{ entry.ableToDrive }}</td>
+      </tr>
+    </table>
+
+    <table ng-show="!driving" class="responstable">
+      <tr>
+        <th>Date</th>
+        <th>Started</th>
+        <th>(16oz)</th>
+        <th>(24oz)</th>
+        <th>Ended</th>
+        <th>Slept</th>
+        <th>Good Sleep?</th>
+
+      </tr>
+      <tr ng-repeat="entry in logHistory">
+        <td>{{ entry.date | date: "MM-dd-yyyy"}}</td>
+        <td>{{ entry.timeStarted | date: "HH:mm:ss"}}</td>
+        <td>{{ entry.smallAmount }}</td>
+        <td>{{ entry.bigAmount }}</td>
+        <td>{{ entry.timeEnded }}</td>
+        <td>{{ entry.timeSleep }}</td>
+        <td>{{ entry.goodSleep }}</td>
+      </tr>
+    </table>
+
+
+  </ion-content>
+</ion-view>

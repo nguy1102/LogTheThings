@@ -9,7 +9,7 @@
           <div>
             <label class="stacked-label">Log Date</label>
           </div>
-          <input type="date" ng-model="logObject.date">
+          <div><input type="date" ng-model="logObject.date"></div>
         </div>
       </ion-item>
 
@@ -31,21 +31,16 @@
         </div>
         <div class="log-content">
           <div>
-            <label class="stacked-label">Time Started</label>
+            <label class="stacked-label">Time Started &nbsp - </label>
           </div>
-          <input type="time" ng-model="logObject.timeStart"> </div>
-      </ion-item>
-
-      <ion-item>
-        <div class="label">
-          <i class="log-icon-small ion-soup-can-outline"></i>
-        </div>
-        <div class="log-content">
-          <div>
-            <label class="stacked-label">16 oz</label>
+          <input type="time" ng-model="logObject.timeStarted"> </div>
+          <div class="log-content">
+            <div>
+              <label class="stacked-label">Time Ended</label>
+            </div>
+            <div>
+              <input type="time" ng-model="logObject.timeEnded" min="logObject.timeStarted"> </div>
           </div>
-          <input type="number" ng-model="logObject.smallAmount">
-        </div>
       </ion-item>
 
       <ion-item>
@@ -54,23 +49,15 @@
         </div>
         <div class="log-content">
           <div>
-            <label class="stacked-label">24 oz</label>
+            <label class="stacked-label">16 oz</label>
           </div>
-          <input type="number" ng-model="logObject.bigAmount"> </div>
-      </ion-item>
-
-
-      <ion-item>
-        <div class="label">
-          <i class="log-icon ion-ios-clock"></i>
+          <input type="number" ng-model="logObject.smallAmount">
         </div>
         <div class="log-content">
           <div>
-            <label class="stacked-label">Time Ended</label>
+            <label class="stacked-label">24 oz</label>
           </div>
-          <div>
-            <input type="time" ng-model="logObject.timeEnded"> </div>
-        </div>
+          <input type="number" ng-model="logObject.bigAmount"> </div>
       </ion-item>
 
       <ion-item>
@@ -82,13 +69,20 @@
             <label class="stacked-label">Bed Time</label>
           </div>
           <div>
-            <input type="time" ng-model="logObject.timeEnded"> </div>
+            <input type="time" ng-model="logObject.timeSleep"> </div>
         </div>
       </ion-item>
 
       <ion-item>
         <div class="label">
-          <i class="log-icon ion-android-happy"></i>
+          <i class="log-icon ion-android-sunny"></i>
+        </div>
+        <div class="log-content">
+          <div>
+            <label class="stacked-label">Can Drive</label>
+          </div>
+          <div>
+            <input type="checkbox" ng-model="logObject.ableToDrive"> </div>
         </div>
         <div class="log-content">
           <div>
@@ -99,23 +93,10 @@
         </div>
       </ion-item>
 
-      <ion-item>
-        <div class="label">
-          <i class="log-icon ion-model-s"></i>
-        </div>
-        <div class="log-content">
-          <div>
-            <label class="stacked-label">Can Drive</label>
-          </div>
-          <div>
-            <input type="checkbox" ng-model="logObject.ableToDrive"> </div>
-        </div>
-      </ion-item>
-
     </ion-list>
     <br>
     <div class="submit-area">
-      <ion-button class="button stable-border submit-button" type="submit">Submit</ion-button>
+      <ion-button class="button stable-border submit-button" type="submit" ng-click="submit(logObject)">Submit</ion-button>
 
     </div>
 
