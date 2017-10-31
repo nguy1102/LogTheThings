@@ -31,6 +31,27 @@
   font-size: 11px;
 }
 
+.history-label {
+  width: 60px;
+  text-align: center;
+  float: left;
+}
+
+.selected-icon {
+  background-color: #0e70a8;
+  color: #fff;
+}
+
+.unselected-icon {
+  color: #0e70a8;
+  border: 1px solid #0e70a8;
+}
+
+.wrapper{
+  width: 31%;
+  margin: 0 auto;
+}
+
 
 .responstable {
   margin: 1em 0;
@@ -45,12 +66,12 @@
   border: 1px solid #D9E4E6;
 }
 .responstable tr:nth-child(odd) {
-  background-color: #EAF3F3;
+  background-color: #a7d5ee;
 }
 .responstable th {
   display: none;
   border: 1px solid #FFF;
-  background-color: #167F92;
+  background-color: #0e70a8;
   color: #FFF;
   padding: 1em;
 }

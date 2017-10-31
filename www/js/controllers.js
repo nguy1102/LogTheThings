@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-  .controller('DashCtrl', function ($scope, $cordovaSQLite) {
+  .controller('DashCtrl', function ($scope, dataBaseService) {
     $scope.logObject = {
       date: new Date(),
       smallAmount: 0,
@@ -15,9 +15,10 @@ angular.module('starter.controllers', [])
 
     $scope.submit = function (submittedObject) {
       submittedObject.date = new Date(submittedObject.date).toLocaleDateString();
-      submittedObject.timeStarted = new Date(submittedObject.timeStarted).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      submittedObject.timeEnded = new Date(submittedObject.timeEnded).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      submittedObject.timeSleep = new Date(submittedObject.timeSleep).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      submittedObject.timeStarted = new Date(submittedObject.timeStarted).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      submittedObject.timeEnded = new Date(submittedObject.timeEnded).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      submittedObject.timeSleep = new Date(submittedObject.timeSleep).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
       db1.transaction(function (tx) {
         tx.executeSql('INSERT INTO things (date, smallAmount, bigAmount, eaten, timeStarted, timeEnded, ableToDrive, timeSleep, goodSleep) VALUES (?,?,?,?,?,?,?,?,?)',
           [submittedObject.date, submittedObject.smallAmount, submittedObject.bigAmount, submittedObject.eaten, submittedObject.timeStarted
@@ -27,6 +28,7 @@ angular.module('starter.controllers', [])
       }, function () {
         console.log('Populated database OK');
       });
+
     }
 
   })
@@ -56,25 +58,45 @@ angular.module('starter.controllers', [])
     };
   })
 
-  .controller('historyController', function ($scope, dataBaseService) {
+  .controller('historyController', function ($scope, dataBaseService, $ionicModal) {
     $scope.logHistory = [];
     $scope.driving = true;
 
     $scope.refresh = function () {
-      dataBaseService.getHistory().then(function (data) {
+      dataBaseService.getAllHistory().then(function (data) {
         // data or false
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
           // $scope.logHistory.push(JSON.stringify(data.item(i)))
           $scope.logHistory.push(data.item(i));
 
         }
-        console.log('stringify', $scope.logHistory );
+        console.log('stringify', $scope.logHistory);
 
-    }, function (err) {
+      }, function (err) {
         // if failing
         console.log(err)
-    });
+      });
+    };
+
+    $scope.saveEntry = function (entry) {
+
     }
+
+    $scope.editEntry = function (entry) {
+      $scope.editingEntry = entry;
+      $ionicModal.fromTemplateUrl('templates/edit-entry.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function (modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+      });
+    }
+
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    }
+
 
     $scope.refresh();
 

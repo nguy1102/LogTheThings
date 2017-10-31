@@ -1,14 +1,13 @@
 <ion-view view-title="History">
   <ion-content class="padding">
-    <div>
-    <div class="label" ng-click="driving = true">
-      <i class="log-icon-small ion-model-s"></i>
+  <div class="wrapper">
+    <div ng-class="{'selected-icon': driving == true, 'unselected-icon': driving == false}" class="history-label"  ng-click="driving = true">
+      <i class="log-icon ion-model-s"></i>
     </div>
-    <div class="label" ng-click="driving = false">
-      <i class="log-icon ion-ios-moon-outline"></i>
-    </div>
+    <div ng-click="driving = false" ng-class="{'selected-icon': driving == false, 'unselected-icon': driving == true}" class="history-label">
+      <i class="log-icon ion-android-alarm-clock"></i>
+    </div> 
   </div>
-
 
     <table ng-show="driving" class="responstable">
       <tr>
@@ -18,12 +17,13 @@
         <th>(24oz)</th>
         <th>Drive</th>
       </tr>
-      <tr ng-repeat="entry in logHistory">
+      <tr ng-repeat="entry in logHistory" ng-click="editEntry(entry)">
         <td>{{ entry.date | date: "MM-dd-yyyy"}}</td>
         <td>{{ entry.timeEnded | date: "HH:mm:ss"}}</td>
         <td>{{ entry.smallAmount }}</td>
         <td>{{ entry.bigAmount }}</td>
-        <td>{{ entry.ableToDrive }}</td>
+        <td><i ng-if="entry.ableToDrive == 'false'" class="assertive ion-android-close"></i>
+          <i ng-if="entry.ableToDrive == 'true'" class="balanced ion-android-done"></i></td>
       </tr>
     </table>
 
@@ -38,14 +38,15 @@
         <th>Good Sleep?</th>
 
       </tr>
-      <tr ng-repeat="entry in logHistory">
+      <tr ng-repeat="entry in logHistory" ng-click="editEntry(entry)">
         <td>{{ entry.date | date: "MM-dd-yyyy"}}</td>
         <td>{{ entry.timeStarted | date: "HH:mm:ss"}}</td>
         <td>{{ entry.smallAmount }}</td>
         <td>{{ entry.bigAmount }}</td>
         <td>{{ entry.timeEnded }}</td>
         <td>{{ entry.timeSleep }}</td>
-        <td>{{ entry.goodSleep }}</td>
+        <td><i ng-if="entry.goodSleep == 'false'" class="assertive ion-android-close"></i>
+          <i ng-if="entry.goodSleep == 'true'" class="balanced ion-android-done"></i></td>
       </tr>
     </table>
 

@@ -1,18 +1,6 @@
-<ion-view view-title="{{logObject.date | date:'MM-dd-yyyy'}}">
+<ion-view view-title="Editing: {{editingEntry.date | date:'MM-dd-yyyy'}}">
   <ion-content class="padding">
     <ion-list>
-      <ion-item>
-        <div class="label">
-          <i class="log-icon ion-ios-calendar-outline"></i>
-        </div>
-        <div class="log-content">
-          <div>
-            <label class="stacked-label">Log Date</label>
-          </div>
-          <div><input type="date" ng-model="logObject.date"></div>
-        </div>
-      </ion-item>
-
       <ion-item>
         <div class="label">
           <i class="log-icon ion-fork"></i>
@@ -22,7 +10,7 @@
           <div>
             <label class="stacked-label">Eaten Food</label>
           </div>
-          <input type="checkbox" ng-model="logObject.eaten"> </div>
+          <input type="checkbox" ng-model="editingEntry.eaten"> </div>
       </ion-item>
 
       <ion-item>
@@ -33,13 +21,13 @@
           <div>
             <label class="stacked-label">Time Started &nbsp - </label>
           </div>
-          <input type="time" ng-model="logObject.timeStarted"> </div>
+          <input type="time" ng-model="editingEntry.timeStarted"> </div>
           <div class="log-content">
             <div>
               <label class="stacked-label">Time Ended</label>
             </div>
             <div>
-              <input type="time" ng-model="logObject.timeEnded" min="logObject.timeStarted"> </div>
+              <input type="time" ng-model="editingEntry.timeEnded" min="editingEntry.timeStarted"> </div>
           </div>
       </ion-item>
 
@@ -51,13 +39,13 @@
           <div>
             <label class="stacked-label">16 oz</label>
           </div>
-          <input type="number" ng-model="logObject.smallAmount">
+          <input type="number" ng-model="editingEntry.smallAmount">
         </div>
         <div class="log-content">
           <div>
             <label class="stacked-label">24 oz</label>
           </div>
-          <input type="number" ng-model="logObject.bigAmount"> </div>
+          <input type="number" ng-model="editingEntry.bigAmount"> </div>
       </ion-item>
 
       <ion-item>
@@ -69,7 +57,7 @@
             <label class="stacked-label">Bed Time</label>
           </div>
           <div>
-            <input type="time" ng-model="logObject.timeSleep"> </div>
+            <input type="time" ng-model="editingEntry.timeSleep"> </div>
         </div>
       </ion-item>
 
@@ -82,22 +70,23 @@
             <label class="stacked-label">Can Drive</label>
           </div>
           <div>
-            <input type="checkbox" ng-model="logObject.ableToDrive"> </div>
+            <input type="checkbox" ng-model="editingEntry.ableToDrive"> </div>
         </div>
         <div class="log-content">
           <div>
             <label class="stacked-label">Good Sleep</label>
           </div>
           <div>
-            <input type="checkbox" ng-model="logObject.goodSleep"> </div>
+            <input type="checkbox" ng-model="editingEntry.goodSleep"> </div>
         </div>
       </ion-item>
 
     </ion-list>
     <br>
     <div class="submit-area">
-      <ion-button class="button stable-border submit-button" type="submit" ng-click="submit(logObject)">Submit</ion-button>
-      <a href="www.google.com">BOop</a>
+      <ion-button class="button positive-border" type="submit" ng-click="saveeditingEntry(editingEntry)">Save</ion-button>
+      <ion-button class="button assertive-border" ng-click="closeModal">Cancel</ion-button>
+
     </div>
 
   </ion-content>
